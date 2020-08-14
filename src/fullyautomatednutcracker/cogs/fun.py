@@ -28,6 +28,18 @@ class Fun(commands.Cog):
         RESPONSE = random.randint(0, 2)
         await ctx.send(OPTIONS[RESPONSE])
         await asyncio.sleep(0.6)
+        try:
+            while True:
+                MESSAGE = await self.bot.wait_for('message', check=(lambda message: message.author == ctx.author),
+                                                  timeout=30)
+                if MESSAGE.content == "rock" or MESSAGE.content == "Rock" or MESSAGE.content == "paper" or MESSAGE.content == "Paper" or MESSAGE.content == "scissors" or MESSAGE.content == "Scissors":
+                    break
+                else:
+                    await ctx.send("That's not an answer you frick. Put in either rock, paper or scissors.")
+                    MESSAGE = " "
+        except asyncio.TimeoutError:
+            await ctx.send(f"{ctx.author.mention} timed out!")
+            return
         if MESSAGE.content == "rock" and RESPONSE == 2 or MESSAGE.content == "Rock" and RESPONSE == 2:
             await ctx.send("https://tenor.com/view/the-goon-win-you-won-willy-wonka-oompa-loompa-fc-gif-14046847")
         elif MESSAGE.content == "paper" and RESPONSE == 0 or MESSAGE.content == "Paper" and RESPONSE == 0:
