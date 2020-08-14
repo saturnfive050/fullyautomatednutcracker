@@ -24,13 +24,7 @@ class Fun(commands.Cog):
         await ctx.send('Thinking of my answer ...')
         await asyncio.sleep(0.8)
         await ctx.send('Got it! Awaiting response.')
-        while True:
-            MESSAGE = await self.bot.wait_for('message', check=lambda message: message.author == ctx.author)
-            if MESSAGE.content == "rock" or MESSAGE.content == "Rock" or MESSAGE.content == "paper" or MESSAGE.content == "Paper" or MESSAGE.content == "scissors" or MESSAGE.content == "Scissors":
-                break
-            else:
-                await ctx.send("That's not an answer you frick. Put in either rock, paper or scissors.")
-                MESSAGE = " "
+        MESSAGE = await self.bot.wait_for('message', check=lambda message: message.author == ctx.author)
         RESPONSE = random.randint(0, 2)
         await ctx.send(OPTIONS[RESPONSE])
         await asyncio.sleep(0.6)
@@ -46,6 +40,8 @@ class Fun(commands.Cog):
             await ctx.send("https://tenor.com/view/monty-python-draw-gif-5447899")
         elif MESSAGE.content == "scissors" and RESPONSE == 2 or MESSAGE.content == "Scissors" and RESPONSE == 2:
             await ctx.send("https://tenor.com/view/monty-python-draw-gif-5447899")
+        else:
+            await ctx.send("https://tenor.com/view/you-lose-good-day-sir-gif-7465431")
 
 
 def setup(bot):
